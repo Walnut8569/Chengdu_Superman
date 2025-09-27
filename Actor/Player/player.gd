@@ -35,13 +35,18 @@ func _physics_process(delta):
 	)
 	
 	handle_animation(delta)
+	update_tree()
 	
-	curAnim = RUN
+
 	
 	var direction = Vector3.ZERO
 	
+	if not is_on_floor():
+		curAnim = JUMP
+	
 	if input_dir.length() > 0:
 		input_dir = input_dir.normalized()
+		curAnim = RUN
 		
 		# 檢查相機是否存在
 		if camera != null:
@@ -62,6 +67,7 @@ func _physics_process(delta):
 		else:
 			# 如果沒有相機,使用世界座標方向(備用方案)
 			direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+			curAnim = IDLE
 		
 		# 角色朝向移動方向
 		$Pivot.basis = Basis.looking_at(direction)
@@ -154,3 +160,20 @@ func handle_animation(delta):
 func update_tree ():
 	anim_tree["parameters/Run/blend_amount"] = run_val
 	anim_tree["parameters/jump/blend_amount"] = jump_val
+	print("更新動畫樹 → Run:", run_val, " Jump:", jump_val)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
