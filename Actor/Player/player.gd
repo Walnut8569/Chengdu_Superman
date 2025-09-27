@@ -79,13 +79,11 @@ func _physics_process(delta):
 	# 測試功能：Q鍵減少玩家血量
 	if Input.is_action_just_pressed("test_player_damage"):
 		take_damage(10.0)
-		print("測試：玩家受到10點傷害")
 	
 	# 測試功能：E鍵減少Boss血量
 	if Input.is_action_just_pressed("test_boss_damage"):
 		if boss and boss.has_method("take_damage"):
-			boss.take_damage(50.0)
-			print("測試：Boss受到50點傷害")
+			boss.take_damage(30.0)
 	
 	velocity = target_velocity
 	move_and_slide()
