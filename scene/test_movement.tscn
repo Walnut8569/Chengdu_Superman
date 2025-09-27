@@ -30,3 +30,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2823424, 0.516451, -1.8821
 
 [node name="boss_V2" parent="." instance=ExtResource("1_eo2ib")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2525043, 0.5212918, -1.2385688)
+
+[node name="Camera3D" type="Camera3D" parent="boss_V2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0332873, 1.2725863)
