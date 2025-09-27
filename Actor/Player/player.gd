@@ -69,6 +69,7 @@ func _physics_process(delta):
 	# 地面速度
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
+
 	
 	# 重力
 	if not is_on_floor():
@@ -122,7 +123,7 @@ func die() -> void:
 #動畫
 
 enum {IDLE, RUN, JUMP}
-var curAnim = IDLE
+var curAnim = RUN
 
 @onready var anim_tree: AnimationTree = $Pivot/mainCharacter/AnimationTree
 
