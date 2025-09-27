@@ -5,6 +5,14 @@ extends CharacterBody3D
 @export var fall_acceleration = 75
 @export var jump_impulse = 20
 
+@export var dash_speed := 30   # 衝刺速度
+@export var dash_duration := 0.2  # 衝刺持續時間（秒）
+@export var dash_cd := 1.0 # 衝刺CD (秒)
+
+var dash_timer := 0.0
+var is_dashing := false
+var dashing_CD := 0.0
+
 # 血量相關
 @export var max_health: float = 100.0
 var current_health: float
@@ -14,6 +22,8 @@ var boss: Node = null
 
 @onready var health_bar = $Pivot/UI/HealthBar
 @onready var camera = $SpringArm3D/Camera3D
+
+
 
 func _ready() -> void:
 	current_health = max_health
@@ -27,6 +37,14 @@ func _ready() -> void:
 	# 尋找Boss
 	boss = get_tree().get_first_node_in_group("boss")
 
+
+func _input(event):
+	if event.is_action_pressed("dash") and not is_dashing and dashing_CD <= 0.0 and is_on_floor():
+		is_dashing = true
+		dash_timer = dash_duration
+		dashing_CD = dash_cd
+		
+
 func _physics_process(delta):
 	# 取得輸入方向
 	var input_dir = Vector2(
@@ -36,35 +54,62 @@ func _physics_process(delta):
 	
 	var direction = Vector3.ZERO
 	
-	if input_dir.length() > 0:
-		input_dir = input_dir.normalized()
+	# 衝刺判定
+
+	if is_dashing:
+		dash_timer -= delta	
 		
-		# 檢查相機是否存在
-		if camera != null:
-			# 取得相機的 basis,計算相機相對方向
-			var cam_basis = camera.global_transform.basis
-			
-			# 取出相機的前、右方向(去掉 y 分量避免角色往上飄)
-			var forward = -cam_basis.z
+		if dash_timer <= 0.0:
+			is_dashing = false
+		else:
+			# 沿著角色正前方（通常 -z）
+			var forward = -$Pivot.global_transform.basis.z
 			forward.y = 0
 			forward = forward.normalized()
 			
-			var right = cam_basis.x
-			right.y = 0
-			right = right.normalized()
+			velocity.x = forward.x * dash_speed
+			velocity.z = forward.z * dash_speed
+			move_and_slide()
+			return;
+	elif dashing_CD > 0.0:
+		dashing_CD -= delta
+
+	if is_on_floor():
+		if input_dir.length() > 0:
+			input_dir = input_dir.normalized()
 			
-			# 把輸入轉換到相機方向
-			direction = (right * input_dir.x + forward * input_dir.y).normalized()
-		else:
-			# 如果沒有相機,使用世界座標方向(備用方案)
-			direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
-		
-		# 角色朝向移動方向
-		$Pivot.basis = Basis.looking_at(direction)
+			# 檢查相機是否存在
+			if camera != null:
+				# 取得相機的 basis,計算相機相對方向
+				var cam_basis = camera.global_transform.basis
+				
+				# 取出相機的前、右方向(去掉 y 分量避免角色往上飄)
+				var forward = -cam_basis.z
+				forward.y = 0
+				forward = forward.normalized()
+				
+				var right = cam_basis.x
+				right.y = 0
+				right = right.normalized()
+				
+				# 把輸入轉換到相機方向
+				direction = (right * input_dir.x + forward * input_dir.y).normalized()
+			else:
+				# 如果沒有相機,使用世界座標方向(備用方案)
+				direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+			
+			# 角色朝向移動方向
+			$Pivot.basis = Basis.looking_at(direction)
 	
 	# 地面速度
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
+		# ✅ 水平速度只在地面上更新
+		target_velocity.x = direction.x * speed
+		target_velocity.z = direction.z * speed
+	else:
+		# 🚫 空中不允許更新水平速度 → 保持之前的速度
+		target_velocity.x = velocity.x
+		target_velocity.z = velocity.z
+	
 	
 	# 重力
 	if not is_on_floor():
