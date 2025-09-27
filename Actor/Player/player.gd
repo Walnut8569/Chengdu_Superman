@@ -34,6 +34,10 @@ func _physics_process(delta):
 		Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
 	)
 	
+	handle_animation(delta)
+	
+	curAnim = RUN
+	
 	var direction = Vector3.ZERO
 	
 	if input_dir.length() > 0:
@@ -108,3 +112,44 @@ func die() -> void:
 	hit.emit()
 	# 可以加入死亡動畫或重新開始遊戲
 	get_tree().reload_current_scene()
+
+
+
+
+
+
+
+#動畫
+
+enum {IDLE, RUN, JUMP}
+var curAnim = IDLE
+
+@onready var anim_tree: AnimationTree = $Pivot/mainCharacter/AnimationTree
+
+@onready var blend_speed = 15
+
+var run_val = 1
+var jump_val = 1
+
+
+
+	
+
+func handle_animation(delta):
+	match curAnim:
+		IDLE:
+			run_val = lerpf(run_val, 0, blend_speed * delta)
+			jump_val = lerpf(jump_val, 0, blend_speed * delta)
+		RUN:
+			run_val = lerpf(run_val, 1, blend_speed * delta)
+			jump_val = lerpf(jump_val, 0, blend_speed * delta)
+		JUMP:
+			run_val = lerpf(run_val, 0, blend_speed * delta)
+			jump_val = lerpf(jump_val, 1, blend_speed * delta)
+			
+
+
+
+func update_tree ():
+	anim_tree["parameters/Run/blend_amount"] = run_val
+	anim_tree["parameters/jump/blend_amount"] = jump_val
