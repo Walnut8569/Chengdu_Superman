@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://3hva7xncn03p"]
+
+[ext_resource type="Script" uid="uid://bib5lyxerh677" path="res://Actor/Player/player.gd" id="1_hp20d"]
+[ext_resource type="PackedScene" uid="uid://bqegik3knaxbh" path="res://Actor/Player/Main_V2.fbx" id="2_mscd5"]
+[ext_resource type="Script" uid="uid://c3rh8b82rampd" path="res://Actor/health_bar.gd" id="3_xawly"]
+[ext_resource type="Script" uid="uid://bftdkokd2w3if" path="res://Actor/Player/camera_spring_arm_3d.gd" id="4_alx52"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmfve"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_hp20d")
+speed = null
+fall_acceleration = null
+jump_impulse = null
+max_health = null
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61874104, 0)
+
+[node name="mainCharacter" parent="Pivot" instance=ExtResource("2_mscd5")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, -0.035800338, 0)
+
+[node name="UI" type="CanvasLayer" parent="Pivot"]
+
+[node name="HealthBar" type="ProgressBar" parent="Pivot/UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = 320.0
+offset_bottom = -20.0
+script = ExtResource("3_xawly")
+
+[node name="Label" type="Label" parent="Pivot/UI/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.2414949, 0)
+shape = SubResource("CapsuleShape3D_gmfve")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(0.9797154, -1.8626451e-09, 0.200394, 0.020783389, 0.99460727, -0.10160884, -0.19931334, 0.103712626, 0.9744321, 0.33626515, 1.7898642, -0.3230036)
+script = ExtResource("4_alx52")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(0.99998593, -0.0033965036, 0.0040870607, 0.002212766, 0.9653725, 0.26086584, -0.0048317313, -0.26085314, 0.9653664, -0.41613823, -1.3589153, 18.043667)

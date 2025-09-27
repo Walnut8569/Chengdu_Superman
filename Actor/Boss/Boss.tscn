@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdh6wqo5ab4vh"]
+
+[ext_resource type="Script" uid="uid://dn8rhe3v3p4hm" path="res://Actor/Boss/boss.gd" id="1_d4hx1"]
+[ext_resource type="PackedScene" uid="uid://cjahy5jjwqmtd" path="res://Actor/Boss/boss.fbx" id="1_lgerd"]
+[ext_resource type="Script" uid="uid://c3rh8b82rampd" path="res://Actor/health_bar.gd" id="3_4yg7d"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d4hx1"]
+
+[node name="Boss" type="CharacterBody3D"]
+script = ExtResource("1_d4hx1")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Boss" type="Node3D" parent="Pivot"]
+
+[node name="boss_V2" parent="Pivot/Boss" instance=ExtResource("1_lgerd")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9766576, 0)
+shape = SubResource("CapsuleShape3D_d4hx1")
+
+[node name="BossUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="BossUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BossUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BossName" type="Label" parent="BossUI/Panel/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="BossUI/Panel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_4yg7d")
+use_three_stage_colors = true
+
+[node name="Label" type="Label" parent="BossUI/Panel/VBoxContainer/BossHealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
