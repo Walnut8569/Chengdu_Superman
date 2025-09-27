@@ -17,6 +17,8 @@ var dashing_CD := 0.0
 @export var max_health: float = 100.0
 var current_health: float
 
+@export var air_control_factor := 0.2  # 空中操作影響比例 (0 = 完全不能操作, 1 = 和地面一樣)
+
 var target_velocity = Vector3.ZERO
 var boss: Node = null
 
@@ -106,10 +108,12 @@ func _physics_process(delta):
 		target_velocity.x = direction.x * speed
 		target_velocity.z = direction.z * speed
 	else:
-		# 🚫 空中不允許更新水平速度 → 保持之前的速度
-		target_velocity.x = velocity.x
-		target_velocity.z = velocity.z
-	
+		## 🚫 空中不允許更新水平速度 → 保持之前的速度
+		#target_velocity.x = velocity.x
+		#target_velocity.z = velocity.z
+			# ✅ 空中速度 → 原本速度 + (輸入方向 * 減弱比例)
+		target_velocity.x = lerp(velocity.x, direction.x * speed, air_control_factor * delta * 5)
+		target_velocity.z = lerp(velocity.z, direction.z * speed, air_control_factor * delta * 5)
 	
 	# 重力
 	if not is_on_floor():
