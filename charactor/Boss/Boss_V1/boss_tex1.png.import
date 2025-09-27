@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bng17slilxtvn"
-path.s3tc="res://.godot/imported/castle_guard_01_2.png-0c1018d40001415cc441b575652dfe32.s3tc.ctex"
+uid="uid://b04lwdb5oobkx"
+path.s3tc="res://.godot/imported/boss_tex1.png-b2bd81cc2672adb004a3120391cf9fda.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "16d2ed20714fd916290f48d68a233060"
-}
 
 [deps]
 
-source_file="res://charactor/mixamo_1/castle_guard_01_2.png"
-dest_files=["res://.godot/imported/castle_guard_01_2.png-0c1018d40001415cc441b575652dfe32.s3tc.ctex"]
+source_file="res://charactor/Boss/Boss_V1/boss_tex1.png"
+dest_files=["res://.godot/imported/boss_tex1.png-b2bd81cc2672adb004a3120391cf9fda.s3tc.ctex"]
 
 [params]
 
@@ -25,12 +22,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://charactor/mixamo_1/castle_guard_01_2.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

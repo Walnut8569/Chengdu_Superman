@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://sgkf7cbtospc"]
+[gd_scene load_steps=4 format=3 uid="uid://cxqytxo41c3ia"]
 
-[ext_resource type="PackedScene" uid="uid://bmy8f3tp8jpjg" path="res://charactor/main_ch/main_ch_V1/Hip Hop Dancing.fbx" id="1_jgcrv"]
+[ext_resource type="PackedScene" uid="uid://d2jd3601y5d2t" path="res://charactor/Boss/Boss_V1/Boss_V1.fbx" id="1_eo2ib"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_djq1u"]
 size = Vector3(16.810318, 1, 38.880272)
@@ -24,5 +24,5 @@ mesh = SubResource("BoxMesh_djq1u")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.87280285, 0.007870728, 0.48800954, -0.488073, 0.014074932, 0.8726894, 0, -0.99987006, 0.01612613, 4.4137535, 4.18771, 0)
 
-[node name="Hip Hop Dancing" parent="." instance=ExtResource("1_jgcrv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89025116, 0.516451, -0.97433877)
+[node name="Boss_V1" parent="." instance=ExtResource("1_eo2ib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38837028, 0.5212918, -3.0494156)
