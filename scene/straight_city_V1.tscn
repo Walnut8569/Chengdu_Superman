@@ -170,3 +170,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.837204, 7.902833)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_set"]
 transform = Transform3D(1, 0, 0, 0, 0.68711287, 0.7265507, 0, -0.7265507, 0.68711287, 0, 5.240026, 0)
+
+[node name="air_wall" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="air_wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="air_wall/StaticBody3D"]
