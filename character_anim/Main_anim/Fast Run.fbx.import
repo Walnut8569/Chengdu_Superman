@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bmy8f3tp8jpjg"
-path="res://.godot/imported/Hip Hop Dancing.fbx-f6384e338c85139d861fee49af0d740e.scn"
+uid="uid://bhur22hdb0rm0"
+path="res://.godot/imported/Fast Run.fbx-2294f481721b6811a539ffe35eb1316f.scn"
 
 [deps]
 
-source_file="res://charactor/main_ch/main_ch_V1/Hip Hop Dancing.fbx"
-dest_files=["res://.godot/imported/Hip Hop Dancing.fbx-f6384e338c85139d861fee49af0d740e.scn"]
+source_file="res://character_anim/Main_anim/Fast Run.fbx"
+dest_files=["res://.godot/imported/Fast Run.fbx-2294f481721b6811a539ffe35eb1316f.scn"]
 
 [params]
 

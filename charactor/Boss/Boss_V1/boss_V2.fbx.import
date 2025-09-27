@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2jd3601y5d2t"
-path="res://.godot/imported/Boss_V1.fbx-64e1e18c942686a9105dca78af59141b.scn"
+uid="uid://cjahy5jjwqmtd"
+path="res://.godot/imported/boss_V2.fbx-dd0d6d8252f29cfbbf8477ef95ca853b.scn"
 
 [deps]
 
-source_file="res://charactor/Boss/Boss_V1/Boss_V1.fbx"
-dest_files=["res://.godot/imported/Boss_V1.fbx-64e1e18c942686a9105dca78af59141b.scn"]
+source_file="res://charactor/Boss/Boss_V1/boss_V2.fbx"
+dest_files=["res://.godot/imported/boss_V2.fbx-dd0d6d8252f29cfbbf8477ef95ca853b.scn"]
 
 [params]
 
