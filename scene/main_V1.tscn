@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://sgkf7cbtospc"]
+[gd_scene load_steps=4 format=3 uid="uid://sgkf7cbtospc"]
 
-[ext_resource type="PackedScene" uid="uid://crp61fs510h6v" path="res://charactor/mixamo_1/castle_guard_01.fbx" id="1_jgcrv"]
-[ext_resource type="Script" uid="uid://dhkt831j2gup2" path="res://scene/camera_spring_arm.gd" id="2_lplmq"]
+[ext_resource type="PackedScene" uid="uid://bmy8f3tp8jpjg" path="res://charactor/main_ch/main_ch_V1/Hip Hop Dancing.fbx" id="1_jgcrv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_djq1u"]
 size = Vector3(16.810318, 1, 38.880272)
@@ -25,12 +24,5 @@ mesh = SubResource("BoxMesh_djq1u")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.87280285, 0.007870728, 0.48800954, -0.488073, 0.014074932, 0.8726894, 0, -0.99987006, 0.01612613, 4.4137535, 4.18771, 0)
 
-[node name="castle_guard_01" parent="." instance=ExtResource("1_jgcrv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47013068, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="castle_guard_01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.054755196, 1.8039615, 0.23481229)
-spring_length = 6.0
-script = ExtResource("2_lplmq")
-
-[node name="Camera3D" type="Camera3D" parent="castle_guard_01/SpringArm3D"]
+[node name="Hip Hop Dancing" parent="." instance=ExtResource("1_jgcrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89025116, 0.516451, -0.97433877)
