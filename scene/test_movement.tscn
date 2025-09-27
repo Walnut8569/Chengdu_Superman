@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxqytxo41c3ia"]
 
-[ext_resource type="PackedScene" uid="uid://cjahy5jjwqmtd" path="res://charactor/Boss/Boss_V1/boss_V2.fbx" id="1_eo2ib"]
-[ext_resource type="PackedScene" uid="uid://bqegik3knaxbh" path="res://charactor/main_ch/main_ch_V1/Main_V2.fbx" id="2_asbvx"]
+[ext_resource type="PackedScene" uid="uid://cgvkq3821f6wf" path="res://Boss.tscn" id="1_asbvx"]
+[ext_resource type="PackedScene" uid="uid://svgkk0cgqw4b" path="res://main_ch.tscn" id="2_2liqe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_djq1u"]
 size = Vector3(16.810318, 1, 38.880272)
@@ -19,17 +19,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3080826, 0, -3.4584618)
 shape = SubResource("BoxShape3D_djq1u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ground/StaticBody3D"]
-transform = Transform3D(14.588118, 0, 0, 0, 0.86966544, 0, 0, 0, 29.180864, 1.1858239, 0, 0)
+transform = Transform3D(14.588118, 0, 0, 0, 0.86966544, 0, 0, 0, 29.180864, 1.1359231, 1.1920929e-07, 0.036787033)
 mesh = SubResource("BoxMesh_djq1u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.87280285, 0.007870728, 0.48800954, -0.488073, 0.014074932, 0.8726894, 0, -0.99987006, 0.01612613, 4.4137535, 4.18771, 0)
 
-[node name="Main_V2" parent="." instance=ExtResource("2_asbvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2823424, 0.516451, -1.8821931)
+[node name="CharacterBody3D2" parent="." instance=ExtResource("1_asbvx")]
 
-[node name="boss_V2" parent="." instance=ExtResource("1_eo2ib")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2525043, 0.5212918, -1.2385688)
-
-[node name="Camera3D" type="Camera3D" parent="boss_V2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0332873, 1.2725863)
+[node name="Main_Ch" parent="." instance=ExtResource("2_2liqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3831575, 0.80242205, -0.33248568)

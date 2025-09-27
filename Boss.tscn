@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgvkq3821f6wf"]
+
+[ext_resource type="PackedScene" uid="uid://cjahy5jjwqmtd" path="res://charactor/Boss/Boss_V1/boss_V2.fbx" id="1_8nckf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lpyfn"]
+size = Vector3(0.47406006, 0.98513794, 0.18964386)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_btb83"]
+radius = 0.12553748
+
+[node name="CharacterBody3D2" type="CharacterBody3D"]
+
+[node name="boss_V2" parent="." instance=ExtResource("1_8nckf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004950255, 0.0011101961, -0.027700782)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004058838, 0.4924469, -0.009876251)
+shape = SubResource("BoxShape3D_lpyfn")
+
+[node name="HEAD" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004420951, 1.1060957, -0.012747645)
+shape = SubResource("SphereShape3D_btb83")
