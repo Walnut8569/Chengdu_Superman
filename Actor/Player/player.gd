@@ -25,20 +25,34 @@ var boss: Node = null
 @onready var health_bar = $Pivot/UI/HealthBar
 @onready var camera = $SpringArm3D/Camera3D
 
+@onready var camPlayer := $SpringArm3D/Camera3D
+@onready var camBoss := $"../Boss/SpringArm3D/Camera3D"
+
+
 
 
 func _ready() -> void:
+	add_to_group("player")
+	camPlayer.current = true; camBoss.current = false
+	
 	current_health = max_health
 	health_bar.update_health(current_health, max_health)
 	add_to_group("player")
 	
 	# 設定碰撞層
-	collision_layer = 2  # 玩家在層2
-	collision_mask = 1 | 4  # 可以碰撞地面(層1)和Boss(層4)
+	#collision_layer = 2  # 玩家在層2
+	#collision_mask = 1 | 4  # 可以碰撞地面(層1)和Boss(層4)
 	
 	# 尋找Boss
 	boss = get_tree().get_first_node_in_group("boss")
-
+	
+	var intro_area = get_tree().get_first_node_in_group("intro_area")
+	if intro_area:
+		intro_area.loadIntro.connect(_on_introarea_loadIntro)
+		
+func _on_introarea_loadIntro() -> void:
+	print("收到訊號！")
+	switch_camera(camPlayer, camBoss)
 
 func _input(event):
 	if event.is_action_pressed("dash") and not is_dashing and dashing_CD <= 0.0 and is_on_floor():
@@ -204,7 +218,21 @@ func handle_animation(delta):
 func update_tree ():
 	anim_tree["parameters/Run/blend_amount"] = run_val
 	anim_tree["parameters/jump/blend_amount"] = jump_val
-	print("更新動畫樹 → Run:", run_val, " Jump:", jump_val)
+	# print("更新動畫樹 → Run:", run_val, " Jump:", jump_val)
+	
+	
+	# 相機交換
+func switch_camera(cam_a: Camera3D, cam_b: Camera3D, time = 1.5):
+	var tween = create_tween()
+	tween.tween_property(
+		cam_a, "global_transform", cam_b.global_transform, time
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# 正式改控制權
+	tween.finished.connect(func():
+		cam_a.current = false
+		cam_b.current = true
+	)
 	
 	
 	
@@ -216,8 +244,7 @@ func update_tree ():
 	
 	
 	
-	
-	
-	
-	
-	
+
+
+func _on_introarea_load_intro() -> void:
+	pass # Replace with function body.
