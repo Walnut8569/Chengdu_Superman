@@ -9,6 +9,10 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_hp20d")
+speed = null
+fall_acceleration = null
+jump_impulse = null
+max_health = null
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61874104, 0)

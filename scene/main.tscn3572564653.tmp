@@ -1,15 +1,14 @@
-[gd_scene load_steps=38 format=3 uid="uid://5fgf2hrxjrvk"]
+[gd_scene load_steps=29 format=3 uid="uid://5fgf2hrxjrvk"]
 
 [ext_resource type="Texture2D" uid="uid://bqnhla67pndif" path="res://scene/texture/floor/brick2.jpg" id="1_2vnhv"]
 [ext_resource type="PackedScene" uid="uid://3hva7xncn03p" path="res://Actor/Player/player.tscn" id="3_0ha60"]
 [ext_resource type="Texture2D" uid="uid://d58j3iduiekq" path="res://scene/texture/city_build/city.jpg" id="3_ardi5"]
 [ext_resource type="Texture2D" uid="uid://dopukrim6dt83" path="res://scene/texture/city_build/city_3.jpg" id="3_b5f6u"]
 [ext_resource type="PackedScene" uid="uid://cdh6wqo5ab4vh" path="res://Actor/Boss/Boss.tscn" id="4_brvut"]
-
-[ext_resource type="AnimationLibrary" uid="uid://6crjb2xk3law" path="res://Actor/Boss/Boss_anim/test/Boss_CG_anim.res" id="4_p1hux"]
-[ext_resource type="PackedScene" uid="uid://bwxr4n5jq7yjy" path="res://Actor/Boss/DamageIndicator.tscn" id="5_damage"]
-[ext_resource type="AnimationLibrary" path="res://Actor/Player/Player_anim/main_anim_pack.res" id="6_of57s"]
-
+[ext_resource type="Texture2D" uid="uid://bycy4pcnjd7ip" path="res://scene/texture/city_build/city_2.jpg" id="4_tqoya"]
+[ext_resource type="AnimationLibrary" uid="uid://hilrv55o4rv2" path="res://Actor/Player/Player_anim/main_anim_pack.res" id="5_0ha60"]
+[ext_resource type="PackedScene" uid="uid://vvujci72sbyo" path="res://Actor/Boss_weapon/boss_weapon_V4.glb" id="6_4j5ol"]
+[ext_resource type="PackedScene" uid="uid://dnuwuqovyvgv3" path="res://scene/prepare_zone/prepare_V2.fbx" id="7_p1hux"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_brvut"]
 size = Vector3(50, 1, 60)
@@ -39,49 +38,8 @@ albedo_texture = ExtResource("4_tqoya")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hybxs"]
 albedo_texture = ExtResource("3_b5f6u")
 
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p1hux"]
-animation = &"main_anim_pack/main_idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ha60"]
-animation = &"main_anim_pack/main_jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4j5ol"]
-animation = &"main_anim_pack/main_run_1"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0ha60"]
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4j5ol"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_of57s"]
-nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
-nodes/Anim_run/position = Vector2(-1140, 560)
-nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
-nodes/Anim_jump/position = Vector2(-840, 560)
-nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
-nodes/Anim_idle/position = Vector2(-1340, 120)
-nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
-nodes/Run/position = Vector2(-840, 180)
-nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
-nodes/jump/position = Vector2(-580, 220)
-node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b5f6u"]
-nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
-nodes/Anim_run/position = Vector2(-1140, 560)
-nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
-nodes/Anim_jump/position = Vector2(-840, 560)
-nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
-nodes/Anim_idle/position = Vector2(-1340, 120)
-nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
-nodes/Run/position = Vector2(-840, 180)
-nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
-nodes/jump/position = Vector2(-580, 220)
-node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wp4xf"]
-size = Vector3(50, 50, 1)
-
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqoya"]
+albedo_texture = ExtResource("3_b5f6u")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2gmf"]
 albedo_texture = ExtResource("4_tqoya")
@@ -100,9 +58,10 @@ animation = &"main_anim_pack/main_run_1"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0ha60"]
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4j5ol"]
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tqoya"]
-
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p1hux"]
+graph_offset = Vector2(-1311.8044, 197.21402)
 nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
 nodes/Anim_run/position = Vector2(-1140, 560)
 nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
@@ -114,10 +73,6 @@ nodes/Run/position = Vector2(-840, 180)
 nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
 nodes/jump/position = Vector2(-580, 220)
 node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
-
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4j5ol"]
-
 
 [node name="main" type="Node3D"]
 
@@ -274,32 +229,6 @@ transform = Transform3D(-3.8148158, 0, -3.5159345, 0, 20, 0, 7.031869, 0, -1.907
 material_override = SubResource("StandardMaterial3D_t7hnk")
 mesh = SubResource("BoxMesh_v1ta3")
 
-[node name="Player_Pivot_mainCharacter2#main_anim_player" type="AnimationPlayer" parent="."]
-root_node = NodePath("../../..")
-libraries = {
-&"main_anim_pack": ExtResource("6_of57s")
-}
-
-[node name="Player_Pivot_mainCharacter2#AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../../..")
-tree_root = SubResource("AnimationNodeBlendTree_of57s")
-anim_player = NodePath("../main_anim_player")
-parameters/Run/blend_amount = 0.0
-parameters/jump/blend_amount = 0.0
-
-[node name="Player_Pivot_mainCharacter#main_anim_player" type="AnimationPlayer" parent="."]
-root_node = NodePath("../../..")
-libraries = {
-&"main_anim_pack": ExtResource("6_of57s")
-}
-
-[node name="Player_Pivot_mainCharacter#AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../../..")
-tree_root = SubResource("AnimationNodeBlendTree_b5f6u")
-anim_player = NodePath("../main_anim_player")
-parameters/Run/blend_amount = 0.0
-parameters/jump/blend_amount = 0.0
-
 [node name="light_set" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_set"]
@@ -317,10 +246,6 @@ light_energy = 1.81
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
 
 [node name="Player" parent="." instance=ExtResource("3_0ha60")]
-speed = 14
-fall_acceleration = 75
-jump_impulse = 20
-max_health = 100.0
 
 [node name="main_anim_player" type="AnimationPlayer" parent="Player/Pivot/mainCharacter" index="2"]
 libraries = {
@@ -329,63 +254,9 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="Player/Pivot/mainCharacter" index="3"]
 tree_root = SubResource("AnimationNodeBlendTree_p1hux")
-
-
-anim_player = NodePath("../AnimationPlayer2")
-parameters/lending/blend_amount = 0.0
-
-[node name="Player" parent="." instance=ExtResource("3_0ha60")]
-
-[node name="Skeleton3D" parent="Player/Pivot/mainCharacter" index="0"]
-bones/0/position = Vector3(0.0017593435, 0.39688134, -0.004040806)
-bones/0/rotation = Quaternion(-0.03971005, -0.36592162, -0.011810819, 0.9297232)
-bones/1/rotation = Quaternion(0.05431281, 0.03932732, -0.011069244, 0.9976879)
-bones/2/rotation = Quaternion(0.09691045, 0.08030814, -0.01838763, 0.9918775)
-bones/3/rotation = Quaternion(0.09691035, 0.080308154, -0.018387642, 0.9918775)
-bones/4/rotation = Quaternion(-0.031755023, -0.010528653, 0.0021200438, 0.99943805)
-bones/5/rotation = Quaternion(-0.06777789, 0.17811017, -0.0057979715, 0.9816565)
-bones/7/rotation = Quaternion(0.6245162, 0.35042754, -0.6114849, 0.33655083)
-bones/8/rotation = Quaternion(0.33404994, -0.124096125, 0.06467041, 0.9321098)
-bones/9/rotation = Quaternion(0.0056071873, 0.07054155, 0.41447657, 0.9073047)
-bones/10/rotation = Quaternion(-0.0009968212, 0.95955473, -0.12137748, -0.2540106)
-bones/11/rotation = Quaternion(0.07824054, 0.9705866, -0.017587166, -0.22700404)
-bones/12/rotation = Quaternion(0.3814368, 0.037051097, 0.0048720017, 0.9236393)
-bones/13/rotation = Quaternion(-2.359224e-16, -3.081488e-33, -1.3877788e-17, 1)
-bones/15/rotation = Quaternion(0.67192584, -0.31761813, 0.5706899, 0.34920982)
-bones/16/rotation = Quaternion(0.30948517, 0.13536988, 0.16229048, 0.92712235)
-bones/17/rotation = Quaternion(0.059429046, 0.0004962722, -0.36232173, 0.9301564)
-bones/18/rotation = Quaternion(0.108692124, 0.9786698, 0.10573234, 0.13860808)
-bones/19/rotation = Quaternion(-0.011248317, 0.9578281, -0.040361464, 0.28427052)
-bones/20/rotation = Quaternion(0.3104114, -0.035133436, 0.049842466, 0.94864446)
-bones/21/rotation = Quaternion(6.938894e-18, -1.3877788e-17, 2.7755576e-17, 1)
-bones/23/rotation = Quaternion(0.0793119, 0.21910504, 0.9615218, -0.14552853)
-bones/24/rotation = Quaternion(-0.33486217, 0.12844005, -0.094485104, 0.9286782)
-bones/25/rotation = Quaternion(0.54760385, -0.033244215, -0.046971187, 0.8347566)
-bones/26/rotation = Quaternion(0.30538476, 0.018199138, -0.025651677, 0.95170957)
-bones/28/rotation = Quaternion(-0.12882066, -0.09329113, 0.97403514, 0.16111334)
-bones/29/rotation = Quaternion(-0.29224548, 0.054575477, 0.01210286, 0.9547082)
-bones/30/rotation = Quaternion(0.7029329, 0.09301949, 0.1578057, 0.6872628)
-bones/31/rotation = Quaternion(0.2969608, 0.0020002718, -0.0015551203, 0.9548863)
-
-[node name="main_anim_player" type="AnimationPlayer" parent="Player/Pivot/mainCharacter" index="2"]
-libraries = {
-&"main_anim_pack": ExtResource("6_of57s")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="Player/Pivot/mainCharacter" index="3"]
-tree_root = SubResource("AnimationNodeBlendTree_tqoya")
 anim_player = NodePath("../main_anim_player")
 parameters/Run/blend_amount = 0.0
 parameters/jump/blend_amount = 0.0
-
-[node name="DamageIndicator" parent="." instance=ExtResource("5_damage")]
-
-[node name="prepare" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8381939, 0, 26.551926)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="prepare"]
-shape = SubResource("BoxShape3D_4j5ol")
-
 
 [node name="boss_weapon_V4" parent="." instance=ExtResource("6_4j5ol")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9741364, -0.34337372, 4.8380737)
@@ -393,7 +264,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9741364, -0.34337372, 4.838
 [node name="prepare_V2" parent="." instance=ExtResource("7_p1hux")]
 transform = Transform3D(-0.9995979, 0, -0.028357834, 0, 1, 0, 0.028357834, 0, -0.9995979, 2.1476183, -0.5, 25.580303)
 
-
-[editable path="Boss"]
 [editable path="Player"]
-[editable path="Player/Pivot/mainCharacter"]
