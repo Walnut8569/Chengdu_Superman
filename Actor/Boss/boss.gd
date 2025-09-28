@@ -41,7 +41,22 @@ func _physics_process(delta: float) -> void:
 	if current_health <= 0 or not player:
 		return
 
-	var distance = global_position.distance_to(player.global_position)
+
+	# 檢查是否需要切換到第二形態
+	check_phase_transition()
+	
+	
+
+
+	if current_phase == 1:
+		# 第一形態：地面攻擊
+		handle_phase1(delta)
+	else:
+		# 第二形態：飛行射擊
+		handle_phase2(delta)
+
+	move_and_slide()
+
 
 	# 檢查是否首次遭遇玩家
 	if not has_encountered_player and distance <= 15.0:  # 15公尺遭遇距離
