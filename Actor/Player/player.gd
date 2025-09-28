@@ -17,6 +17,12 @@ var dashing_CD := 0.0
 @export var max_health: float = 100.0
 var current_health: float
 
+# 攻擊相關
+@export var attack_damage: float = 25.0
+@export var attack_range: float = 3.0
+@export var attack_cooldown: float = 0.5
+var attack_timer: float = 0.0
+
 @export var air_control_factor := 0.2  # 空中操作影響比例 (0 = 完全不能操作, 1 = 和地面一樣)
 
 var target_velocity = Vector3.ZERO
@@ -27,6 +33,12 @@ var boss: Node = null
 
 @onready var camPlayer := $SpringArm3D/Camera3D
 @onready var camBoss := $"../Boss/SpringArm3D/Camera3D"
+
+# 音效播放器
+var audio_player_fight_start: AudioStreamPlayer
+
+# 开场完成信号
+signal intro_finished
 
 
 
@@ -39,20 +51,25 @@ func _ready() -> void:
 	health_bar.update_health(current_health, max_health)
 	add_to_group("player")
 	
-	# 設定碰撞層
-	#collision_layer = 2  # 玩家在層2
-	#collision_mask = 1 | 4  # 可以碰撞地面(層1)和Boss(層4)
-	
 	# 尋找Boss
 	boss = get_tree().get_first_node_in_group("boss")
 	
 	var intro_area = get_tree().get_first_node_in_group("intro_area")
 	if intro_area:
 		intro_area.loadIntro.connect(_on_introarea_loadIntro)
+
+	# 初始化音效播放器
+	setup_audio_players()
 		
 func _on_introarea_loadIntro() -> void:
 	print("收到訊號！")
+	# 播放开场音效
+	if audio_player_fight_start:
+		audio_player_fight_start.play()
 	switch_camera(camPlayer, camBoss)
+	await get_tree().create_timer(5.0).timeout
+	print("5 秒後執行")
+	switch_camera(camBoss, camPlayer, 0.8)
 
 func _input(event):
 	if event.is_action_pressed("dash") and not is_dashing and dashing_CD <= 0.0 and is_on_floor():
@@ -62,12 +79,21 @@ func _input(event):
 		
 
 func _physics_process(delta):
+	# 更新攻擊冷卻
+	if attack_timer > 0:
+		attack_timer -= delta
+
+	# 玩家攻擊輸入
+	if Input.is_action_just_pressed("attack") and attack_timer <= 0:
+		attack()
+		attack_timer = attack_cooldown
+
 	# 取得輸入方向
 	var input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
 	)
-	
+
 	handle_animation(delta)
 	update_tree()
 	
@@ -159,6 +185,21 @@ func _physics_process(delta):
 	velocity = target_velocity
 	move_and_slide()
 
+# 玩家攻擊邏輯
+func attack() -> void:
+	print("玩家攻擊！")
+
+	# 搜尋場景裡的 Boss
+	var boss = get_tree().get_first_node_in_group("boss")
+	if boss:
+		var distance = global_position.distance_to(boss.global_position)
+		if distance <= attack_range:
+			if boss.has_method("take_damage"):
+				boss.take_damage(attack_damage)
+				print("命中Boss！造成 %s 點傷害" % attack_damage)
+		else:
+			print("攻擊落空，Boss太遠了")
+
 # 受傷函數
 func take_damage(amount: float) -> void:
 	current_health -= amount
@@ -232,11 +273,18 @@ func switch_camera(cam_a: Camera3D, cam_b: Camera3D, time = 1.5):
 	tween.finished.connect(func():
 		cam_a.current = false
 		cam_b.current = true
+		# 发送开场完成信号
+		intro_finished.emit()
+		print("开场运镜完成，发送信号给Boss")
 	)
-	
-	
-	
-	
+
+# 設置音效播放器
+func setup_audio_players():
+	# 創建fight_start音效播放器
+	audio_player_fight_start = AudioStreamPlayer.new()
+	var fight_start_audio = load("res://Audio/fight_start.mp3")
+	audio_player_fight_start.stream = fight_start_audio
+	add_child(audio_player_fight_start)
 	
 	
 	

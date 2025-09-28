@@ -1,13 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnfk7wq8bgny4"]
 
 [ext_resource type="Script" uid="uid://f42mooxlq5ap" path="res://Actor/Boss/Bullet.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://vvujci72sbyo" path="res://Actor/Boss_weapon/boss_weapon_V4.glb" id="2_8hjym"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1"]
-radius = 0.2
-
-[sub_resource type="SphereMesh" id="SphereMesh_1"]
-radius = 0.2
-height = 0.4
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qt7xr"]
+radius = 1.0
 
 [node name="Bullet" type="RigidBody3D"]
 collision_layer = 8
@@ -16,10 +13,11 @@ contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_script")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_1")
+[node name="boss_weapon_V4" parent="." instance=ExtResource("2_8hjym")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 2.103249, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_1")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879758, 0)
+shape = SubResource("CylinderShape3D_qt7xr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

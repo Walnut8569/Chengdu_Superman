@@ -1,0 +1,453 @@
+[gd_scene load_steps=40 format=3 uid="uid://5fgf2hrxjrvk"]
+
+[ext_resource type="Texture2D" uid="uid://bycy4pcnjd7ip" path="res://scene/texture/city_build/city_2.jpg" id="1_4j5ol"]
+[ext_resource type="Texture2D" uid="uid://dopukrim6dt83" path="res://scene/texture/city_build/city_3.jpg" id="2_p1hux"]
+[ext_resource type="PackedScene" uid="uid://3hva7xncn03p" path="res://Actor/Player/player.tscn" id="3_0ha60"]
+[ext_resource type="PackedScene" uid="uid://dnuwuqovyvgv3" path="res://scene/prepare_zone/prepare_V2.fbx" id="4_0ha60"]
+[ext_resource type="PackedScene" uid="uid://cdh6wqo5ab4vh" path="res://Actor/Boss/Boss.tscn" id="4_brvut"]
+[ext_resource type="AnimationLibrary" uid="uid://6crjb2xk3law" path="res://Actor/Boss/Boss_anim/test/Boss_CG_anim.res" id="4_p1hux"]
+[ext_resource type="PackedScene" uid="uid://bwxr4n5jq7yjy" path="res://Actor/Boss/DamageIndicator.tscn" id="5_damage"]
+[ext_resource type="AnimationLibrary" uid="uid://hilrv55o4rv2" path="res://Actor/Player/Player_anim/main_anim_pack.res" id="6_of57s"]
+[ext_resource type="Script" uid="uid://bo8px5ianmd1e" path="res://scene/introarea.gd" id="9_b5f6u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brvut"]
+size = Vector3(50, 1, 60)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wp4xf"]
+load_path = "res://.godot/imported/brick2.jpg-9ae2d42b6789e3891cb35c82cbcd2f3d.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ardi5"]
+albedo_texture = SubResource("CompressedTexture2D_wp4xf")
+
+[sub_resource type="BoxMesh" id="BoxMesh_pkx8r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_of57s"]
+albedo_texture = ExtResource("1_4j5ol")
+
+[sub_resource type="BoxMesh" id="BoxMesh_v1ta3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_brvut"]
+load_path = "res://.godot/imported/city.jpg-f99f307f5344205c00e018ffe0e84309.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7hnk"]
+albedo_texture = SubResource("CompressedTexture2D_brvut")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5f6u"]
+albedo_texture = ExtResource("2_p1hux")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqoya"]
+albedo_texture = ExtResource("1_4j5ol")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k65ib"]
+albedo_texture = ExtResource("1_4j5ol")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wscrc"]
+albedo_texture = ExtResource("1_4j5ol")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mswub"]
+albedo_texture = ExtResource("2_p1hux")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hybxs"]
+albedo_texture = ExtResource("1_4j5ol")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p1hux"]
+animation = &"main_anim_pack/main_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ha60"]
+animation = &"main_anim_pack/main_jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4j5ol"]
+animation = &"main_anim_pack/main_run_1"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0ha60"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4j5ol"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_of57s"]
+nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
+nodes/Anim_run/position = Vector2(-1140, 560)
+nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
+nodes/Anim_jump/position = Vector2(-840, 560)
+nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
+nodes/Anim_idle/position = Vector2(-1340, 120)
+nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
+nodes/Run/position = Vector2(-840, 180)
+nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
+nodes/jump/position = Vector2(-580, 220)
+node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b5f6u"]
+nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
+nodes/Anim_run/position = Vector2(-1140, 560)
+nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
+nodes/Anim_jump/position = Vector2(-840, 560)
+nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
+nodes/Anim_idle/position = Vector2(-1340, 120)
+nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
+nodes/Run/position = Vector2(-840, 180)
+nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
+nodes/jump/position = Vector2(-580, 220)
+node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wp4xf"]
+size = Vector3(50, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ha60"]
+size = Vector3(1, 50, 60)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_of57s"]
+animation = &"Boss_CG_anim/boss_idle_V1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b5f6u"]
+animation = &"Boss_CG_anim/lending_V1"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_p1hux"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p1hux"]
+nodes/Boss_idle_anim/node = SubResource("AnimationNodeAnimation_of57s")
+nodes/Boss_idle_anim/position = Vector2(-640, 120)
+nodes/Boss_lending_anim/node = SubResource("AnimationNodeAnimation_b5f6u")
+nodes/Boss_lending_anim/position = Vector2(-520, 360)
+nodes/lending/node = SubResource("AnimationNodeBlend2_p1hux")
+nodes/lending/position = Vector2(-220, 60)
+node_connections = [&"output", 0, &"lending", &"lending", 0, &"Boss_idle_anim", &"lending", 1, &"Boss_lending_anim"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tqoya"]
+nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
+nodes/Anim_run/position = Vector2(-1140, 560)
+nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
+nodes/Anim_jump/position = Vector2(-840, 560)
+nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
+nodes/Anim_idle/position = Vector2(-1340, 120)
+nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
+nodes/Run/position = Vector2(-840, 180)
+nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
+nodes/jump/position = Vector2(-580, 220)
+node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4j5ol"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqoya"]
+size = Vector3(4.336914, 4.5340576, 1.1671143)
+
+[node name="main" type="Node3D"]
+
+[node name="ground" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_brvut")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground/StaticBody3D"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 60, 0.023285866, -1, 0.00014305115)
+material_override = SubResource("StandardMaterial3D_ardi5")
+mesh = SubResource("BoxMesh_pkx8r")
+
+[node name="city_build" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="city_build"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 23.164791, 10.488242, -2.506678)
+material_override = SubResource("StandardMaterial3D_of57s")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 14, 0, 0, 0, 4, 23.164791, 7.3964148, -6.695912)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 17.590162, 10.488242, -18.989286)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 3.2651439, 10.488242, -29.427391)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 9.239878, 10.488242, -24.512688)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, -3.6558237, 10.488242, -29.427391)
+material_override = SubResource("StandardMaterial3D_b5f6u")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, -12.933891, 10.488242, -29.427391)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 16, 0, 0, 0, 4, -19.464546, 8.421261, -18.683857)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 24, 0, 0, 0, 8, -24.664082, 10.488242, -3.4672167)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 24, 0, 0, 0, 8, 22.562832, 10.488242, -13.356598)
+material_override = SubResource("StandardMaterial3D_tqoya")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 24, 0, 0, 0, 8, -8.32583, 10.488242, -35.2787)
+material_override = SubResource("StandardMaterial3D_k65ib")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 24, 0, 0, 0, 8, 1.2836819, 10.488242, -35.2787)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 24, 0, 0, 0, 8, 8.204171, 10.488242, -35.2787)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(-15.512671, 0, 4.0577807, 0, 24, 0, -9.130007, 0, -6.8945208, 20.337013, 10.488242, -31.203056)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(-0.6661787, 0, 7.9945188, 0, 23.999998, 0, -17.987665, 0, -0.29607844, 35.755318, 10.488242, 5.95372)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(6.1969037, 0, 7.375608, 0, 16, 0, -14.751216, 0, 3.0984519, 22.030073, 8.449475, 20.66566)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(15.380187, 0, 2.2050989, 0, 19, 0, -4.4101977, 0, 7.6900935, 9.753346, 8.449475, 34.465027)
+material_override = SubResource("StandardMaterial3D_wscrc")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(15.302589, 0, -2.3361697, 0, 16, 0, 4.6723394, 0, 7.6512947, -6.994793, 4.7225924, 34.298668)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, -23.41579, 10.488242, 3.4610252)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 8, -23.41579, 10.488242, 9.116845)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 23.164791, 10.488242, 4.4839187)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 20, 0, 0, 0, 4, 21.572332, 10.488242, 10.711023)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(4.9599853, 0, -3.1384132, 0, 20, 0, 6.2768264, 0, 2.4799926, -17.729242, 10.488242, 21.57201)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(7.081785, 0, -1.8606664, 0, 19.999998, 0, 3.7213328, 0, 3.5408926, -11.392354, 10.488241, 28.162712)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(1.9734206, 0, -3.8763905, 0, 19.999998, 0, 7.752781, 0, 0.9867103, -23.083359, 10.488242, 16.497063)
+material_override = SubResource("StandardMaterial3D_mswub")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(-6.4485836, 0, -2.3672647, 0, 20, 0, 4.7345295, 0, -3.2242918, -19.015846, 10.488244, -26.065508)
+material_override = SubResource("StandardMaterial3D_t7hnk")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="city_build/StaticBody3D"]
+transform = Transform3D(-3.8148158, 0, -3.5159345, 0, 20, 0, 7.031869, 0, -1.9074079, -22.980673, 10.488244, -12.514543)
+material_override = SubResource("StandardMaterial3D_hybxs")
+mesh = SubResource("BoxMesh_v1ta3")
+
+[node name="Player_Pivot_mainCharacter2#main_anim_player" type="AnimationPlayer" parent="."]
+root_node = NodePath("../../..")
+libraries = {
+&"main_anim_pack": ExtResource("6_of57s")
+}
+
+[node name="Player_Pivot_mainCharacter2#AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../../..")
+tree_root = SubResource("AnimationNodeBlendTree_of57s")
+anim_player = NodePath("../main_anim_player")
+parameters/Run/blend_amount = 0.0
+parameters/jump/blend_amount = 0.0
+
+[node name="Player_Pivot_mainCharacter#main_anim_player" type="AnimationPlayer" parent="."]
+root_node = NodePath("../../..")
+libraries = {
+&"main_anim_pack": ExtResource("6_of57s")
+}
+
+[node name="Player_Pivot_mainCharacter#AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../../..")
+tree_root = SubResource("AnimationNodeBlendTree_b5f6u")
+anim_player = NodePath("../main_anim_player")
+parameters/Run/blend_amount = 0.0
+parameters/jump/blend_amount = 0.0
+
+[node name="light_set" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_set"]
+transform = Transform3D(1, 0, 0, 0, 0.68711287, 0.7265507, 0, -0.7265507, 0.68711287, 0, 5.240026, 0)
+light_color = Color(1, 0.74488825, 0.33152643, 1)
+light_energy = 1.81
+
+[node name="air_wall" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="air_wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="air_wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.973417)
+shape = SubResource("BoxShape3D_wp4xf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="air_wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.916023, 0, 0)
+shape = SubResource("BoxShape3D_0ha60")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="air_wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.208563, 0, 0)
+shape = SubResource("BoxShape3D_0ha60")
+
+[node name="Boss" parent="." instance=ExtResource("4_brvut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4893436, 0, -17.32785)
+
+[node name="AnimationTree" type="AnimationTree" parent="Boss/Pivot/Boss/boss_V2" index="2"]
+root_node = NodePath("../../../..")
+tree_root = SubResource("AnimationNodeBlendTree_p1hux")
+anim_player = NodePath("../../../../AnimationPlayer2")
+parameters/lending/blend_amount = 0.0
+
+[node name="Panel" parent="Boss/BossUI" index="0"]
+offset_top = 0.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" parent="Boss/BossUI/Panel" index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Boss"]
+libraries = {
+&"Boss_CG_anim": ExtResource("4_p1hux")
+}
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_0ha60")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7326751, 0, 27.858376)
+collision_layer = 2
+collision_mask = 9
+
+[node name="Skeleton3D" parent="Player/Pivot/mainCharacter" index="0"]
+bones/0/position = Vector3(0.0016194194, 0.39639622, -0.005000838)
+bones/0/rotation = Quaternion(-0.038772482, -0.36607745, -0.011308209, 0.9297075)
+bones/1/rotation = Quaternion(0.055348862, 0.039525453, -0.01130389, 0.99762046)
+bones/2/position = Vector3(0, 0.088251114, -2.1815584e-11)
+bones/2/rotation = Quaternion(0.0990479, 0.080708995, -0.01904469, 0.9916214)
+bones/3/rotation = Quaternion(0.09904791, 0.08070906, -0.0190447, 0.9916214)
+bones/4/rotation = Quaternion(-0.037565563, -0.010752777, 0.0018083258, 0.99923474)
+bones/5/rotation = Quaternion(-0.060807064, 0.17684843, -0.00920268, 0.98231494)
+bones/7/rotation = Quaternion(0.62988484, 0.34367236, -0.61096406, 0.33445072)
+bones/8/position = Vector3(-1.34304495e-11, 0.14441983, -1.7817237e-10)
+bones/8/rotation = Quaternion(0.32783973, -0.12766336, 0.06496829, 0.9338107)
+bones/9/position = Vector3(3.691366e-11, 0.24142396, -3.3635084e-10)
+bones/9/rotation = Quaternion(0.0031452444, 0.068145834, 0.41051576, 0.9092981)
+bones/10/position = Vector3(-2.5108207e-10, 0.22217369, 2.0184419e-09)
+bones/10/rotation = Quaternion(-9.606788e-05, 0.95678526, -0.13951842, -0.2551405)
+bones/11/position = Vector3(-3.1930542e-10, 0.038615607, 1.3786969e-09)
+bones/11/rotation = Quaternion(0.07100843, 0.9713377, -0.0056312387, -0.2267805)
+bones/12/position = Vector3(-2.3564484e-13, 0.022444429, 1.0630263e-09)
+bones/12/rotation = Quaternion(0.36977515, 0.032743625, -0.008473049, 0.9285055)
+bones/13/rotation = Quaternion(-2.359224e-16, -3.081488e-33, -1.3877788e-17, 1)
+bones/15/rotation = Quaternion(0.6776149, -0.31043452, 0.5697481, 0.3462017)
+bones/16/position = Vector3(-1.7917126e-11, 0.14441983, -1.7777746e-10)
+bones/16/rotation = Quaternion(0.3005639, 0.14256477, 0.16110358, 0.9291837)
+bones/17/position = Vector3(-1.4272043e-10, 0.2414185, 5.087656e-10)
+bones/17/rotation = Quaternion(0.053031955, 0.0101630585, -0.36156133, 0.9307835)
+bones/18/position = Vector3(-6.0017286e-10, 0.22255878, 3.1570901e-10)
+bones/18/rotation = Quaternion(0.113338135, 0.97763234, 0.10299587, 0.14415759)
+bones/19/position = Vector3(5.4406923e-11, 0.039749235, 1.3683169e-09)
+bones/19/rotation = Quaternion(-0.018465225, 0.95708454, -0.053945847, 0.28414476)
+bones/20/position = Vector3(3.1512856e-10, 0.021934528, 3.4716918e-10)
+bones/20/rotation = Quaternion(0.338733, -0.04584547, 0.013275782, 0.9396713)
+bones/21/rotation = Quaternion(6.938894e-18, -1.3877788e-17, 2.7755576e-17, 1)
+bones/23/rotation = Quaternion(0.078987755, 0.2216103, 0.9607793, -0.14680952)
+bones/24/position = Vector3(-3.5183564e-11, 0.18675086, 6.6868906e-13)
+bones/24/rotation = Quaternion(-0.3356889, 0.12799333, -0.09415669, 0.9284747)
+bones/25/position = Vector3(-3.8922074e-11, 0.11572298, -1.5026194e-10)
+bones/25/rotation = Quaternion(0.54710793, -0.034209214, -0.04862071, 0.8349483)
+bones/26/position = Vector3(1.77683e-11, 0.15646815, -2.106206e-10)
+bones/26/rotation = Quaternion(0.30538782, 0.018158244, -0.02557389, 0.9517114)
+bones/28/rotation = Quaternion(-0.12838802, -0.08709242, 0.97481036, 0.16023813)
+bones/29/position = Vector3(-2.4991492e-10, 0.18679772, -2.1323518e-10)
+bones/29/rotation = Quaternion(-0.30242687, 0.053219132, 0.011651206, 0.9516145)
+bones/30/position = Vector3(-6.1164226e-11, 0.115531325, -5.5209205e-12)
+bones/30/rotation = Quaternion(0.7074411, 0.09234308, 0.15685304, 0.6829327)
+bones/31/position = Vector3(-6.593932e-11, 0.15885532, 4.091685e-09)
+bones/31/rotation = Quaternion(0.29685017, 0.0018264689, -0.0014556143, 0.95492125)
+
+[node name="main_anim_player" type="AnimationPlayer" parent="Player/Pivot/mainCharacter" index="2"]
+libraries = {
+&"main_anim_pack": ExtResource("6_of57s")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Player/Pivot/mainCharacter" index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_tqoya")
+anim_player = NodePath("../main_anim_player")
+parameters/Run/blend_amount = 0.0
+parameters/jump/blend_amount = 0.0
+
+[node name="DamageIndicator" parent="." instance=ExtResource("5_damage")]
+
+[node name="prepare" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8381939, 0, 26.551926)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="prepare"]
+shape = SubResource("BoxShape3D_4j5ol")
+
+[node name="Node3D" type="Node3D" parent="prepare/CollisionShape3D"]
+
+[node name="prepare_V2" parent="prepare/CollisionShape3D/Node3D" instance=ExtResource("4_0ha60")]
+transform = Transform3D(-0.999055, 0, 0.04346256, 0, 1, 0, -0.04346256, 0, -0.999055, 0, 0, 0)
+
+[node name="introarea" type="Area3D" parent="." groups=["intro_area"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0387622, 24.863453)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_b5f6u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="introarea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.668457, 0.9667357, 0.08355713)
+shape = SubResource("BoxShape3D_tqoya")
+
+[connection signal="loadIntro" from="introarea" to="Player" method="_on_introarea_load_intro"]
+
+[editable path="Boss"]
+[editable path="Player"]
+[editable path="Player/Pivot/mainCharacter"]

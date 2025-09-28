@@ -23,6 +23,9 @@ var player: Node = null
 var current_phase: int = 1  # 1=地面形態, 2=飛行形態
 var phase2_triggered: bool = false
 
+# 开场控制
+var intro_finished: bool = false
+
 # 傷害指示器（外部節點引用）
 var damage_indicator: MeshInstance3D
 
@@ -46,6 +49,14 @@ var shoot_timer: float = 0.0
 var flying_target_position: Vector3
 var flying_move_timer: float = 0.0
 
+# 音效播放器
+var audio_player_bai: AudioStreamPlayer
+var audio_player_fight_start: AudioStreamPlayer
+
+var is_active: bool = false   # 預設不啟動
+func _on_introarea_intro_finished() -> void:
+	is_active = true # Replace with function body.
+
 @onready var health_bar = $BossUI/Panel/VBoxContainer/BossHealthBar
 @onready var name_label = $BossUI/Panel/VBoxContainer/BossName
 
@@ -64,9 +75,13 @@ func _ready() -> void:
 
 	# 延遲尋找玩家，確保玩家已經初始化
 	call_deferred("find_player")
+	call_deferred("connect_to_player_signals")
 
 	# 獲取外部傷害指示器節點
 	damage_indicator = get_tree().get_first_node_in_group("damage_indicator")
+
+	# 初始化音效播放器
+	setup_audio_players()
 
 # 尋找玩家函數
 func find_player() -> void:
@@ -79,12 +94,14 @@ func _physics_process(delta: float) -> void:
 	if current_health <= 0 or not player:
 		return
 
+	# 如果开场还没结束，不进行任何攻击行为
+	if not intro_finished:
+		return
+
 	# 檢查是否需要切換到第二形態
 	check_phase_transition()
 	
 	
-
-
 	if current_phase == 1:
 		# 第一形態：地面攻擊
 		handle_phase1(delta)
@@ -210,6 +227,9 @@ func handle_sky_attack(delta: float) -> void:
 			if sky_attack_timer >= 1.0:  # 1秒後開始下降
 				sky_attack_state = "falling"
 				sky_attack_timer = 0.0
+				# 播放falling音效
+				if audio_player_bai:
+					audio_player_bai.play()
 
 		"falling":
 			# 下降階段：直接移動到目標位置
@@ -402,3 +422,27 @@ func handle_animation(delta):
 			
 func update_tree ():
 	Boss_anim_tree["parameters/Lending/blend_amount"] = lending_val
+
+# 設置音效播放器
+func setup_audio_players():
+	# 創建bai音效播放器
+	audio_player_bai = AudioStreamPlayer.new()
+	var bai_audio = load("res://Audio/bai.mp3")
+	audio_player_bai.stream = bai_audio
+	add_child(audio_player_bai)
+
+	# 創建fight_start音效播放器
+	audio_player_fight_start = AudioStreamPlayer.new()
+	var fight_start_audio = load("res://Audio/fight_start.mp3")
+	audio_player_fight_start.stream = fight_start_audio
+	add_child(audio_player_fight_start)
+
+# 连接player的信号
+func connect_to_player_signals():
+	if player and player.has_signal("intro_finished"):
+		player.intro_finished.connect(_on_intro_finished)
+
+# 开场结束回调
+func _on_intro_finished():
+	intro_finished = true
+	print("Boss收到开场结束信号，开始攻击！")
