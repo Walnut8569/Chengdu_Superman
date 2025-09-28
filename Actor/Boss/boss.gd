@@ -81,6 +81,9 @@ func _physics_process(delta: float) -> void:
 
 	# 檢查是否需要切換到第二形態
 	check_phase_transition()
+	
+	
+
 
 	if current_phase == 1:
 		# 第一形態：地面攻擊
