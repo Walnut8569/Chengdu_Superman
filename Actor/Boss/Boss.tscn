@@ -60,3 +60,10 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(0.91212004, -0.062712416, 0.40509757, 0, 0.9882283, 0.15298584, -0.40992302, -0.13954145, 0.901383, 0.336, 3.584094, -0.323)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(0.99998593, -0.0033965036, 0.0040870607, 0.002212766, 0.9653725, 0.26086584, -0.0048317313, -0.26085314, 0.9653664, -0.41613823, -1.3589153, 18.043667)
