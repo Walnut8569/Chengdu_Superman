@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxe2tgo00n35f"]
+
+[ext_resource type="AnimationLibrary" path="res://Actor/Player/Player_anim/main_anim_pack.res" id="1_pippe"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p1hux"]
+animation = &"main_anim_pack/main_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ha60"]
+animation = &"main_anim_pack/main_jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4j5ol"]
+animation = &"main_anim_pack/main_run_1"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0ha60"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4j5ol"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ufh25"]
+nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
+nodes/Anim_run/position = Vector2(-1140, 560)
+nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
+nodes/Anim_jump/position = Vector2(-840, 560)
+nodes/Anim_idle/node = SubResource("AnimationNodeAnimation_p1hux")
+nodes/Anim_idle/position = Vector2(-1340, 120)
+nodes/Run/node = SubResource("AnimationNodeBlend2_0ha60")
+nodes/Run/position = Vector2(-840, 180)
+nodes/jump/node = SubResource("AnimationNodeBlend2_4j5ol")
+nodes/jump/position = Vector2(-580, 220)
+node_connections = [&"output", 0, &"jump", &"Run", 0, &"Anim_idle", &"Run", 1, &"Anim_run", &"jump", 0, &"Run", &"jump", 1, &"Anim_jump"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="main_anim_player" type="AnimationPlayer" parent="."]
+libraries = {
+&"main_anim_pack": ExtResource("1_pippe")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_ufh25")
+anim_player = NodePath("../main_anim_player")
+parameters/Run/blend_amount = 0.0
+parameters/jump/blend_amount = 0.0

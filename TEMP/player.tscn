@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://3hva7xncn03p"]
+[gd_scene load_steps=6 format=3 uid="uid://2l05cr0awer6"]
 
 [ext_resource type="Script" uid="uid://bib5lyxerh677" path="res://Actor/Player/player.gd" id="1_hp20d"]
 [ext_resource type="PackedScene" uid="uid://bqegik3knaxbh" path="res://Actor/Player/Main_V2.fbx" id="2_mscd5"]
@@ -9,11 +9,16 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_hp20d")
+speed = null
+fall_acceleration = null
+jump_impulse = null
+max_health = null
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61874104, 0)
 
 [node name="mainCharacter" parent="Pivot" instance=ExtResource("2_mscd5")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, -0.035800338, 0)
 
 [node name="Skeleton3D" parent="Pivot/mainCharacter" index="0"]
 bones/0/position = Vector3(0.0037241757, 0.40485424, -0.005898465)
