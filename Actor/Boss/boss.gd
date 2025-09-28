@@ -213,6 +213,7 @@ func handle_sky_attack(delta: float) -> void:
 			# 強制設定到目標的X和Z座標
 			global_position.x = target_fall_position.x
 			global_position.z = target_fall_position.z
+			curAnim = LENDING
 
 			# 快速下降
 			velocity.x = 0
@@ -371,3 +372,30 @@ func shoot_at_player() -> void:
 	bullet.setup(global_position, direction_to_player, bullet_damage, bullet_speed)
 
 	print("Boss發射子彈！")
+
+
+
+
+
+
+#動襪
+
+enum {IDLE, LENDING}
+var curAnim = LENDING
+
+@onready var Boss_anim_tree: AnimationTree = $Pivot/Boss/boss_V2/AnimationTree
+
+@onready var blend_speed = 15
+
+
+var lending_val = 1
+
+func handle_animation(delta):
+	match curAnim:
+		IDLE:
+			lending_val = lerpf(lending_val, 0, blend_speed * delta)
+		LENDING:
+			lending_val = lerpf(lending_val, 1, blend_speed * delta)
+			
+func update_tree ():
+	Boss_anim_tree["parameters/Lending/blend_amount"] = lending_val
