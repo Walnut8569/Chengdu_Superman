@@ -61,7 +61,7 @@ animation = &"main_anim_pack/main_run_1"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_4j5ol"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p1hux"]
-graph_offset = Vector2(-1557.228, 266.45963)
+graph_offset = Vector2(-1311.8044, 197.21402)
 nodes/Anim_run/node = SubResource("AnimationNodeAnimation_4j5ol")
 nodes/Anim_run/position = Vector2(-1140, 560)
 nodes/Anim_jump/node = SubResource("AnimationNodeAnimation_0ha60")
@@ -246,10 +246,6 @@ light_energy = 1.81
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
 
 [node name="Player" parent="." instance=ExtResource("3_0ha60")]
-speed = 14
-fall_acceleration = 75
-jump_impulse = 20
-max_health = 100.0
 
 [node name="main_anim_player" type="AnimationPlayer" parent="Player/Pivot/mainCharacter" index="2"]
 libraries = {

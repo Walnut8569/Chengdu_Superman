@@ -55,15 +55,21 @@ func _physics_process(delta):
 	)
 	
 	handle_animation(delta)
+	update_tree()
 	
-	curAnim = RUN
+
 	
 	var direction = Vector3.ZERO
 	
+
+		
+
+
 	# 衝刺判定
 
 	if is_dashing:
 		dash_timer -= delta	
+
 		
 		if dash_timer <= 0.0:
 			is_dashing = false
@@ -83,6 +89,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		if input_dir.length() > 0:
 			input_dir = input_dir.normalized()
+      curAnim = RUN #動畫設為跑步
 			
 			# 檢查相機是否存在
 			if camera != null:
@@ -103,7 +110,8 @@ func _physics_process(delta):
 			else:
 				# 如果沒有相機,使用世界座標方向(備用方案)
 				direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
-			
+        direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+        curAnim = IDLE			
 			# 角色朝向移動方向
 			$Pivot.basis = Basis.looking_at(direction)
 	
@@ -118,10 +126,12 @@ func _physics_process(delta):
 			# ✅ 空中速度 → 原本速度 + (輸入方向 * 減弱比例)
 		target_velocity.x = lerp(velocity.x, direction.x * speed, air_control_factor * delta * 5)
 		target_velocity.z = lerp(velocity.z, direction.z * speed, air_control_factor * delta * 5)
+
 	
 	# 重力
 	if not is_on_floor():
 		target_velocity.y -= fall_acceleration * delta
+    curAnim = JUMP # 動畫設為跳躍
 	else:
 		target_velocity.y = 0
 	
@@ -171,7 +181,7 @@ func die() -> void:
 #動畫
 
 enum {IDLE, RUN, JUMP}
-var curAnim = IDLE
+var curAnim = RUN
 
 @onready var anim_tree: AnimationTree = $Pivot/mainCharacter/AnimationTree
 
@@ -202,3 +212,20 @@ func handle_animation(delta):
 func update_tree ():
 	anim_tree["parameters/Run/blend_amount"] = run_val
 	anim_tree["parameters/jump/blend_amount"] = jump_val
+	print("更新動畫樹 → Run:", run_val, " Jump:", jump_val)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
